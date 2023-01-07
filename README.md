@@ -17,9 +17,9 @@ npm i @discommand/message-components@next
 ---
 
 ```js
-const { ComponentsHandler } = require('@discommand/message-components')
+const { ComponentHandler } = require('@discommand/message-components')
 // ...
-const handler = new ComponentsHandler(client, {
+const handler = new ComponentHandler(client, {
   directory: __dirname + '/components',
 })
 

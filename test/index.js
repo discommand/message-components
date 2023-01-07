@@ -1,13 +1,22 @@
-import {
+// import {
+//   Client,
+//   GatewayIntentBits,
+//   ComponentType,
+//   ActionRowBuilder,
+//   ButtonStyle,
+//   ButtonBuilder,
+// } from 'discord.js'
+// import { ComponentHandler } from '..'
+// import { join } from 'path'
+const {
   Client,
   GatewayIntentBits,
-  ComponentType,
   ActionRowBuilder,
   ButtonStyle,
   ButtonBuilder,
-} from 'discord.js'
-import { ComponentsHandler } from '..'
-import { join } from 'path'
+} = require('discord.js')
+const { ComponentHandler } = require('..')
+const { join } = require('path')
 const { token } = require('./config.json')
 
 const client = new Client({
@@ -18,7 +27,7 @@ const client = new Client({
   ],
 })
 
-const handler = new ComponentsHandler(client, {
+const handler = new ComponentHandler(client, {
   directory: join(__dirname, 'components'),
 })
 
@@ -32,7 +41,7 @@ client.on('messageCreate', msg => {
     msg.reply({
       content: 'a',
       components: [
-        new ActionRowBuilder<ButtonBuilder>().addComponents(
+        new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId('a')
             .setLabel('a')
