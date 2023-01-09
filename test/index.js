@@ -1,13 +1,3 @@
-// import {
-//   Client,
-//   GatewayIntentBits,
-//   ComponentType,
-//   ActionRowBuilder,
-//   ButtonStyle,
-//   ButtonBuilder,
-// } from 'discord.js'
-// import { ComponentHandler } from '..'
-// import { join } from 'path'
 const {
   Client,
   GatewayIntentBits,

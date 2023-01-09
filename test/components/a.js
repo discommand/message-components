@@ -5,6 +5,6 @@ module.exports = class extends MessageComponent {
     super('a')
   }
   execute(interaction) {
-    interaction.update({ content: 'asdfjkl;asdfjkl;asdf' })
+    interaction.update({ content: 'test', components: [] })
   }
 }

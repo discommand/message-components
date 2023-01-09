@@ -1,9 +1,16 @@
 import { type Client, Collection } from 'discord.js'
-import { type MessageComponent } from './Component'
-import type { ComponentsHandlerOptions } from './types'
-import { interactionCreate } from './utils'
-import { deloadModule, loadModule, reloadModule } from './utils/moduleLoader'
-import { DeLoadOptions, ReLoadOptions } from './types'
+import type { MessageComponent } from './Component'
+import {
+  interactionCreate,
+  deloadModule,
+  loadModule,
+  reloadModule,
+} from './utils'
+import type {
+  DeLoadOptions,
+  ReLoadOptions,
+  ComponentsHandlerOptions,
+} from './types'
 
 export class ComponentHandler {
   public modules: Collection<string, MessageComponent> = new Collection()
@@ -15,7 +22,7 @@ export class ComponentHandler {
   public load(modules: MessageComponent[]) {
     modules.forEach(module => {
       this.modules.set(module.name, module)
-      console.log(module.name)
+      console.log(`[discommand-message-component] ${module.name} is loaded.`)
     })
   }
 
@@ -24,6 +31,7 @@ export class ComponentHandler {
       const { module, fileDir } = option
       this.modules.delete(module.name)
       delete require.cache[require.resolve(fileDir)]
+      console.log(`[discommand-message-component] ${module.name} is deloaded.`)
     })
   }
 
@@ -33,6 +41,7 @@ export class ComponentHandler {
       this.modules.delete(module.name)
       delete require.cache[require.resolve(fileDir)]
       this.load([module])
+      console.log(`[discommand-message-component] ${module.name} is reloaded.`)
     })
   }
 

@@ -8,11 +8,7 @@ export function interactionCreate(handler: ComponentHandler) {
 
       if (!module) return
 
-      try {
-        await module.execute(interaction)
-      } catch (error) {
-        console.log(error)
-      }
+      await module.execute(interaction)
     }
   })
 }

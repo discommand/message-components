@@ -16,31 +16,20 @@ export const returnDir = (fileDir: string): string[] => {
   return dir
 }
 
-export const loadModule = async (dir: string): Promise<MessageComponent[]> => {
+export const loadModule = async (
+  fileDir: string
+): Promise<MessageComponent[]> => {
   const modules: MessageComponent[] = []
-  for (const dirent of readdirSync(dir, { withFileTypes: true })) {
-    if (dirent.isDirectory()) {
-      for (const file of readdirSync(`${dir}/${dirent.name}`)) {
-        const tempModule = await import(`${dir}/${dirent.name}/${file}`)
 
-        if (!tempModule.default) {
-          const module: MessageComponent = new tempModule()
-          modules.push(module)
-        } else {
-          const module: MessageComponent = new tempModule.default()
-          modules.push(module)
-        }
-      }
-    } else if (dirent.isFile()) {
-      const tempModule = await import(`${dir}/${dirent.name}`)
+  for (const dir of returnDir(fileDir)) {
+    const tempModule = await import(dir)
 
-      if (!tempModule.default) {
-        const module: MessageComponent = new tempModule()
-        modules.push(module)
-      } else {
-        const module: MessageComponent = new tempModule.default()
-        modules.push(module)
-      }
+    if (!tempModule.default) {
+      const module: MessageComponent = new tempModule()
+      modules.push(module)
+    } else {
+      const module: MessageComponent = new tempModule.default()
+      modules.push(module)
     }
   }
 
