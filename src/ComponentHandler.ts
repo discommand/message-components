@@ -17,7 +17,9 @@ export class ComponentHandler {
   public constructor(
     public readonly client: Client,
     public readonly options: ComponentsHandlerOptions
-  ) {}
+  ) {
+    client.on('ready', () => interactionCreate(this))
+  }
 
   public load(modules: MessageComponent[]) {
     modules.forEach(module => {
@@ -47,7 +49,6 @@ export class ComponentHandler {
 
   public async loadAll() {
     this.load(await loadModule(this.options.directory))
-    interactionCreate(this)
   }
 
   public reloadAll() {

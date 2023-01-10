@@ -37,13 +37,12 @@ export const loadModule = async (
 }
 
 export const deloadModule = (fileDir: string): DeLoadOptions[] => {
-  const dir = returnDir(fileDir)
   const modules: DeLoadOptions[] = []
 
   loadModule(fileDir) //
     .then(module => {
       module.forEach(module => {
-        dir.forEach(dir =>
+        returnDir(fileDir).forEach(dir =>
           modules.push({
             module,
             fileDir: dir,
@@ -56,13 +55,12 @@ export const deloadModule = (fileDir: string): DeLoadOptions[] => {
 }
 
 export const reloadModule = (fileDir: string): ReLoadOptions[] => {
-  const dir = returnDir(fileDir)
   const modules: DeLoadOptions[] = []
 
   loadModule(fileDir) //
     .then(module => {
       module.forEach(module => {
-        dir.forEach(dir =>
+        returnDir(fileDir).forEach(dir =>
           modules.push({
             module,
             fileDir: dir,
